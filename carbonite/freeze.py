@@ -1,6 +1,7 @@
 import os
 import imp
 import sys
+import argparse
 from collections import defaultdict
 
 import pip
@@ -20,8 +21,13 @@ def pip_install(package):
     pip.logger.consumers = []
 
 def main():
-    module = get_module(sys.argv[1])
-    output_path = os.path.realpath(sys.argv[2])
+    parser = argparse.ArgumentParser(description='Freeze Python package dependencies')
+    parser.add_argument('source', help='path to source file with dynamic dependencies and a __carbonite__ variable')
+    parser.add_argument('dest', help='path to a new Python file that will be written with frozen dependencies')
+    args = parser.parse_args()
+
+    module = get_module(args.source)
+    output_path = os.path.realpath(args.dest)
     package_list_vars = module.__carbonite__
 
     # install all specified packages
@@ -38,8 +44,10 @@ def main():
         package_list = getattr(module, var_name)
         for package in package_list:
             package_name = pkg_resources.Requirement.parse(package).project_name
-            package_version = pkg_resources.require(package_name)[0].version
-            frozen[var_name].append('{}=={}'.format(package_name, package_version))
+            for subpackage in pkg_resources.require(package_name):
+                spec = '{}=={}'.format(subpackage.project_name, subpackage.version)
+                if spec not in frozen[var_name]:
+                    frozen[var_name].append(spec)
 
     # write the freeze file
     with open(output_path, 'w') as f:
