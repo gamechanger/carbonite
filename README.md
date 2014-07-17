@@ -11,7 +11,7 @@ Freeze your Python package dependencies
 
 Carbonite provides a command line tool that acts on a Python module specifying some floating dependencies for your project. It takes these floating dependencies, installs them using Pip to get the current versions, then writes a new Python file that looks like your old one but with static dependencies.
 
-Basically, it takes this:
+Basically, it takes a file like this as input:
 
 ```python
 # we use a __carbonite__ variable to tell carbonite which vars to operate on
@@ -21,7 +21,7 @@ __carbonite__ = ['INSTALL_REQUIRES']
 INSTALL_REQUIRES = ['Flask >= 0.10.1']
 ```
 
-Resolves and installs those dependencies, then creates a new Python file that has frozen versions of the packages you specified and their dependencies, all the way down the dependency graph:
+Carbonite then resolves and installs those dependencies. If that succeeds, it then creates a new Python file that has frozen versions of the packages you specified and their dependencies, all the way down the dependency graph:
 
 ```python
 INSTALL_REQUIRES = [
