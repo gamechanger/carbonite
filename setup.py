@@ -3,6 +3,7 @@ from setuptools import setup
 setup(name='carbonite',
       version='0.0.2',
       description='Freeze your Python package dependencies',
+      url='https://github.com/gamechanger/carbonite',
       author='GameChanger',
       author_email='kiril@gc.io',
       license='MIT',
