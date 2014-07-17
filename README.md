@@ -38,7 +38,7 @@ INSTALL_REQUIRES = [
 Carbonite gives you the following advantages over `pip freeze`:
 
 1. `pip freeze` outputs every single package installed in your current Python environment. Carbonite works from a specific list, so you are able to only list the packages specific to your current context.
-1. Carbonite allows you to separate dependencies into groups. You can specify your install and test package dependencies separate, saving your users some build time if they don't need to run tests.
+1. Carbonite allows you to separate dependencies into groups. You can specify your install and test package dependencies separately, saving your users some build time if they don't need to run tests.
 1. The output from Carbonite is a valid Python file and can be easily imported for use in `setup.py` scripts.
 
 ### Usage ###
