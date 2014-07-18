@@ -43,6 +43,8 @@ def main():
         for package in package_list:
             pip_install(package)
 
+    reload(pkg_resources)
+
     # construct the frozen requirements
     frozen = defaultdict(list)
     for var_name in package_list_vars:
