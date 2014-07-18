@@ -14,6 +14,10 @@ def get_module(relative_path):
     return sys.modules[module_name]
 
 def pip_install(package):
+    # we want to perform an upgrade of ONLY the packages we have specifically defined,
+    # not necessarily their dependencies. pip only supports a full recursive upgrade,
+    # so we hack it together with an uninstall
+    pip.main(['uninstall', '-q', '-y', package.replace(' ', '')])
     return_code = pip.main(['install', '--process-dependency-links', package.replace(' ', '')])
     if return_code != 0:
         raise ValueError('installing {} failed with return code {}'.format(package, return_code))
