@@ -14,7 +14,7 @@ def get_module(relative_path):
     return sys.modules[module_name]
 
 def pip_install(package):
-    return_code = pip.main(['install', '--upgrade', '--process-dependency-links', package.replace(' ', '')])
+    return_code = pip.main(['install', '--process-dependency-links', package.replace(' ', '')])
     if return_code != 0:
         raise ValueError('installing {} failed with return code {}'.format(package, return_code))
     # prevent duplicated output, see https://github.com/pypa/pip/issues/1618
