@@ -1,3 +1,9 @@
+#ABANDONMENT NOTICE#
+
+Carbonite spent most of its time trying to dance around peculiarities in pip's mechanisms for installing packages. This ended up being way more trouble than it was worth.
+
+Carbonite's successor, [freezeray](http://github.com/gamechanger/freezeray), avoid this problem entirely by delegating the actual installation of packages to pip itself. You should use it instead of this.
+
 carbonite
 =========
 
